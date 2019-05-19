@@ -12,8 +12,8 @@ var ejs 	 		= require('ejs');
 
 var emailHelper 	= require('sendgrid').mail;
 
-var logger = require("./logging-component");
-var config = require('./emailconfig'); // get our config file
+var logger 			= require("./logging-component");
+var emailconfig 	= require('./emailconfig'); // get our config file
 /*
 	Cloud MongoDB Based Security & Operations
 */
@@ -36,7 +36,7 @@ var sessionStore = new MongoStore({mongooseConnection: mongoose.connection });
 app.use(session({
     cookie: { maxAge: 1000*60*30 } ,
 	//This is the Secret Key
-    secret: "inferstrat session secret code",
+    secret: process.env.SESSION_SECRET,
     store: sessionStore
 }));
 
@@ -100,7 +100,7 @@ router.get("/getuser", function(req,res){
 });
 
 var emailService = function(emailContainer, callBack){
-	var sg = require('sendgrid')(config.email_api_key);
+	var sg = require('sendgrid')(emailconfig.email_api_key);
 	var request = sg.emptyRequest({
 	  method: 'POST',
 	  path: '/v3/mail/send',
