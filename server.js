@@ -239,7 +239,9 @@ app.post("/createcontact", function(req,res){
 	};
 	company.find({_id: _id} , function(err, _company){
 		if(err) res.json({}); 
-		_company.contact.push(_contact);
+		console.log('Total Contacts before = ' + _company.contact.length);
+		_company.contact[_company.contact.length] = _contact;
+		console.log('Total Contacts after = ' + _company.contact.length);
 		_company.save(function(err2){
 			res.json(_company);
 		});
