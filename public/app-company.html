@@ -119,12 +119,15 @@
 								<span  ng-if="company.active" class="">Active</span>
 								<span  ng-if="!company.active" class="">In-Active</span>
 							</td>				
-							<td>
+							<td class="text-right">
 								<button class="btn btn-xs btn-primary" type="button" ng-click="goToContacts(company)">
 									Contacts
 								</button>
 								<button class="btn btn-xs btn-primary" type="button" ng-click="goToBatches(company)">
 									Batches
+								</button>
+								<button class="btn btn-xs btn-primary" type="button" ng-click="goToRemarks(company)">
+									Remarks
 								</button>						
 								<button class="btn btn-xs btn-primary" type="button" ng-click="goToEditCompany(company)">
 									Edit
