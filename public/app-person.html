@@ -39,7 +39,7 @@
   </head>
 
   <body>
-    <div id="wrapper" ng-app="homeApp" ng-controller="homeCtrl">
+    <div id="wrapper" ng-app="personApp" ng-controller="personCtrl">
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0;  background-color: #5e5e5e;">
 			<headertag></headertag>
@@ -48,7 +48,7 @@
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header fonty">Dashboard</h1>
+					<h1 class="page-header fonty">Manage Person</h1>
 				</div>
 				<div class="col-lg-12">
 					
@@ -66,8 +66,8 @@
   </body>
 </html>
 <script>
-	var home = angular.module('homeApp', []);
-	home.directive('headertag', function($compile) {
+	var person = angular.module('personApp', []);
+	person.directive('headertag', function($compile) {
 		var directive = {};
 		directive.restrict = 'E';
 		directive.templateUrl = "/resources/templates/header.html";		
@@ -76,7 +76,7 @@
 		};		
 		return directive;
 	});
-	home.directive('leftmenu', function($compile) {
+	person.directive('leftmenu', function($compile) {
 		var directive = {};
 		directive.restrict = 'E';
 		directive.templateUrl = "/resources/templates/app-left-menu.html";		
@@ -93,7 +93,7 @@
 		});	
 	}
 	
-	home.controller('homeCtrl', function($scope, $http) {
+	person.controller('personCtrl', function($scope, $http) {
 		$http.get("/user")
 		.then(function(response) {
 			$scope.userData = response.data.userData;

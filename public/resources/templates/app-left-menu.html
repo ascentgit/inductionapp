@@ -5,6 +5,14 @@
 							<a ng-if="dasboardtab == 'active'" href="dashboard" class='active fonty'><i class="fa fa-gear fa-fw"></i> <strong>  Dashboard </strong> </a>						
                             <a ng-if="dasboardtab != 'active'" href="dashboard" class='fonty'><i class="fa fa-gear fa-fw"></i> Dashboard </a>
                         </li>
+                        <li ng-if="userData.role == 'ADMIN'">
+                            <a ng-if="companytab == 'active'" href="company" class='active fonty'><i class="fa fa-gear fa-fw"></i> <strong>  Manage Company </strong> </a>                        
+                            <a ng-if="companytab != 'active'" href="company" class='fonty'><i class="fa fa-gear fa-fw"></i> Manage Company </a>
+                        </li>
+                        <li ng-if="userData.role == 'ADMIN'">
+                            <a ng-if="persontab == 'active'" href="person" class='active fonty'><i class="fa fa-gear fa-fw"></i> <strong>  Manage Person </strong> </a>                        
+                            <a ng-if="persontab != 'active'" href="person" class='fonty'><i class="fa fa-gear fa-fw"></i> Manage Person </a>
+                        </li>
                         <li ng-if="userData.role == 'GUEST'">
                             <a ng-if="inductiontab == 'active'" href="induction" class='active fonty'><i class="fa fa-gear fa-fw"></i> <strong>  Induction From </strong> </a>                     
                             <a ng-if="inductiontab != 'active'" href="induction" class='fonty'><i class="fa fa-gear fa-fw"></i> Induction From </a>

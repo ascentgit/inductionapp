@@ -42,6 +42,8 @@ app.use(session({
 
 //Schema Mapping
 var user                = require('./app/models/user');
+var person              = require('./app/models/person');
+var company             = require('./app/models/company');
 
 var path = __dirname + '/public/';
 app.set('view engine', 'html');
@@ -172,6 +174,12 @@ app.get("/induction", function(req,res){
 	else res.sendFile(path + 'app-induction.html');
 });
 
+app.get("/company", function(req,res){
+	if(req.session.userData == undefined)
+		res.redirect('/login');
+	else res.sendFile(path + 'app-company.html');
+});
+
 app.get("/logout", function(req,res){
 	res.redirect('/login');
 });
@@ -179,11 +187,32 @@ app.get("/logout", function(req,res){
 /*
 	APIs
 */
-app.get('/user', function(req, res) {
+router.get('/user', function(req, res) {
   if(req.session.userData == undefined) return {};
   res.json({success: true, userData: req.session.userData});
 });
 
+router.get("/getcompanies", function(req,res){
+	if(req.session.userData == undefined) return {};
+	res.json(company.findAll());
+});
+
+router.post("/createcompany", function(req,res){
+	if(req.session.userData == undefined) return {};
+	let name = req.body.name || req.query.name;
+	var _company = new company({
+		company_code: 'COM_' + Math.floor(Math.random()),
+		name: name,
+		address: 
+		status: 'Initiated'
+		create_date: new Date(),
+		create_by: req.session.userData.username,
+		active: true
+	});
+	_company.save(function(err){
+		res.redirect('/company');
+	});
+});
 
 http.listen(process.env.PORT || 3010, () => {				
 	logger.log('##################################################');
