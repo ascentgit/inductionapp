@@ -192,12 +192,12 @@ router.get('/user', function(req, res) {
   res.json({success: true, userData: req.session.userData});
 });
 
-router.get("/getcompanies", function(req,res){
+app.get("/getcompanies", function(req,res){
 	if(req.session.userData == undefined) return {};
 	res.json(company.findAll());
 });
 
-router.post("/createcompany", function(req,res){
+app.post("/createcompany", function(req,res){
 	if(req.session.userData == undefined) return {};
 	let name = req.body.name || req.query.name;
 	let address = req.body.address || req.query.address;
