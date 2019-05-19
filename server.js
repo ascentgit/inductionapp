@@ -62,10 +62,10 @@ router.get("/authenticate", function(req, res){
 });
 
 router.post("/authenticate", function(req, res){
-	let userId = req.body.userId || req.query.userId;
+	let username = req.body.username || req.query.username;
 	let password = req.body.password || req.query.password;
-	if(undefined != userId && undefined != password && '' != userId && '' != password){
-		user.findOne({userId: userId}, function(err, userData) {
+	if(undefined != username && undefined != password && '' != username && '' != password){
+		user.findOne({username: username}, function(err, userData) {
 			if (!userData) {
 			  res.render('login.html', {message: 'User not found'});
 			} else {
@@ -192,11 +192,9 @@ app.get("/logout", function(req,res){
 */
 router.get('/user', function(req, res) {
   var userId = req.body.userId || req.query.userId;
-  user.findOne({'userId': userId}, function(err, userData) {
+  user.findOne({'username': username}, function(err, userData) {
 	userData.password = null;
-	menu.find({'userId': userId, app: true }, function(err, menuList) {
-		res.json({success: true, data: userData, menu: menuList});
-	});
+	res.json({success: true, data: userData});
   });
 });
 
