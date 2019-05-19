@@ -149,7 +149,7 @@ app.get("/", function(req,res){
 	if(null != req.session.userData){
 		res.redirect('/' + req.session.userData.homeUrl);
 	} else {
-		res.render('login.html', {message: 'Session Expired. Please Login Again.'});
+		res.render('login.html');
 	}
 });
 
