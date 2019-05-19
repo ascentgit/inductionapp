@@ -54,50 +54,6 @@ app.use("/", router);
 router.use(function (req, res, next) {
 	next();
 });
-/*
-	Get Method not Allowed for authentication
-*/
-router.get("/authenticate", function(req, res){
-	res.redirect('/login');
-});
-
-router.post("/authenticate", function(req, res){
-	let username = req.body.username || req.query.username;
-	let password = req.body.password || req.query.password;
-	if(undefined != username && undefined != password && '' != username && '' != password){
-		user.findOne({username: username}, function(err, userData) {
-			if (!userData) {
-			  res.render('login.html', {message: 'User not found'});
-			} else {
-				if (userData.password != password) {
-					res.render('login.html', {message: 'Invalid Password'});
-				} else if(!userData.active){
-					res.render('login.html', {message: 'Incative User. Please contact Admin'});
-				} else {
-					userData.password = '';
-					req.session.userData = userData;
-					console.log(req.session.userData.homeUrl);
-					res.redirect('/' + userData.homeUrl);
-				}
-			}
-		});	
-	} else {
-		res.render('login.html', {message: 'User Id/Password cannot be blank'});
-	}
-});	
-
-router.get("/getuser", function(req,res){
-	if(req.session.userData != undefined && req.session.userData.userId != undefined){
-		if(req.session.userMenu == undefined){
-			menu.find({userId: req.session.userData.userId, web: true}, function(err, userMenu) {
-				req.session.userMenu = userMenu;
-				res.json({ success: true, userData: req.session.userData, userMenu: userMenu});
-			});
-		} else {
-			res.json({ success: true, userData: req.session.userData, userMenu: req.session.userMenu});
-		}
-	} else res.json({success: false, operation: false, message: 'Session Expired. Please login again'});
-});
 
 var emailService = function(emailContainer, callBack){
 	var sg = require('sendgrid')(emailconfig.email_api_key);
@@ -144,22 +100,54 @@ var emailHandler = function(emailContainer, callBack){
 	});
 }
 
+var urlFormatter = function(_userData){
+	switch(_userData.role){
+		case 'GUEST': return path + 'app-induction.html';
+		case 'ADMIN': return path + 'app-' + _userData.homeUrl + '.html';
+	}
+	return path + 'app-induction.html'
+}
+
+/*
+	Get Method not Allowed for authentication
+*/
+router.get("/authenticate", function(req, res){
+	res.redirect('/login');
+});
+
+router.post("/authenticate", function(req, res){
+	let username = req.body.username || req.query.username;
+	let password = req.body.password || req.query.password;
+	if(undefined != username && undefined != password && '' != username && '' != password){
+		user.findOne({username: username}, function(err, userData) {
+			if (!userData) {
+			  res.render('login.html', {message: 'User not found'});
+			} else {
+				if (userData.password != password) {
+					res.render('login.html', {message: 'Invalid Password'});
+				} else if(!userData.active){
+					res.render('login.html', {message: 'Incative User. Please contact Admin'});
+				} else {
+					userData.password = '';
+					req.session.userData = userData;
+					console.log(req.session.userData.homeUrl);
+					res.redirect(urlFormatter(userData));
+				}
+			}
+		});	
+	} else {
+		res.render('login.html', {message: 'User Id/Password cannot be blank'});
+	}
+});	
+
 //All URL Patterns Routing
-app.get("/", function(req,res){
+router.get("/", function(req,res){
 	if(null != req.session.userData){
 		res.redirect('/' + req.session.userData.homeUrl);
 	} else {
 		res.render('login.html', {message: ''});
 	}
 });
-
-var urlFormatter = function(_userData){
-	switch(_userData.ROLE){
-		case 'GUEST': return path + 'app-induction.html';
-		case 'ADMIN': return path + 'app-' + req.session.userData.homeUrl + '.html';
-	}
-	return path + 'app-induction.html'
-}
 
 router.get("/login", function(req,res){
 	if(null != req.session || undefined != req.session)
@@ -183,15 +171,11 @@ router.get("/logout", function(req,res){
 	res.redirect('/login');
 });
 
-app.get("/logout", function(req,res){
-	res.redirect('/login');
-});
-
 /*
 	APIs
 */
 router.get('/user', function(req, res) {
-  var userId = req.body.userId || req.query.userId;
+  var username = req.body.username || req.query.username;
   user.findOne({'username': username}, function(err, userData) {
 	userData.password = null;
 	res.json({success: true, data: userData});
