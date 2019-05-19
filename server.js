@@ -194,7 +194,10 @@ router.get('/user', function(req, res) {
 
 app.get("/getcompanies", function(req,res){
 	if(req.session.userData == undefined) return {};
-	res.json(company.find());
+	company.find(function(err, companyList){
+		res.json(companyList == null ? [] : companyList);
+	});
+	
 });
 
 app.post("/createcompany", function(req,res){
