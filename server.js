@@ -228,18 +228,19 @@ app.post("/createcompany", function(req,res){
 app.post("/createcontact", function(req,res){
 	if(req.session.userData == undefined) return {};
 	let _id = req.body.id || req.query.id;
+	var _contact = {
+		name: req.body.name || req.query.name,
+		designation: req.body.designation || req.query.designation,
+		department: req.body.department || req.query.department,
+		email: req.body.email || req.query.email,
+		phone: req.body.phone || req.query.phone,
+		altPhone: req.body.altPhone || req.query.altPhone,
+		availability: req.body.availability || req.query.availability
+	};
 	company.find({_id: _id} , function(err, _company){
-		var _contact = {
-			name: req.body.name || req.query.name,
-			designation: req.body.designation || req.query.designation,
-			department: req.body.department || req.query.department,
-			email: req.body.email || req.query.email,
-			phone: req.body.phone || req.query.phone,
-			altPhone: req.body.altPhone || req.query.altPhone,
-			availability: req.body.availability || req.query.availability
-		};
+		if(err) res.json({}); 
 		_company.contact.push(_contact);
-		_company.save(function(err){
+		_company.save(function(err2){
 			res.json(_company);
 		});
 	});
