@@ -91,7 +91,7 @@
 		$http.get("/user")
 		.then(function(response) {
 			$scope.selectedTab = '';
-			$scope.name = response.data.userData.name;
+			$scope.name = response.data.userData.first_name + ' ' + response.data.userData.last_name;
 			//dashboardController($scope, $http);
 		});	
 	});
