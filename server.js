@@ -149,7 +149,7 @@ app.get("/", function(req,res){
 	if(null != req.session.userData){
 		res.redirect('/' + req.session.userData.homeUrl);
 	} else {
-		res.render('login.html');
+		res.render('login.html', {message: ''});
 	}
 });
 
