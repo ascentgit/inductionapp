@@ -237,10 +237,10 @@ app.post("/createcontact", function(req,res){
 		altPhone: req.body.altPhone || req.query.altPhone,
 		availability: req.body.availability || req.query.availability
 	};
-	company.find({_id: _id} , function(err, _company){
+	company.findOne({_id: _id} , function(err, _company){
 		if(err) res.json({}); 
 		console.log('Total Contacts before = ' + JSON.stringify(_company));
-		_company.contact[_company.contact.length] = _contact;
+		_company.contact.push(_contact);
 		console.log('Total Contacts after = ' + JSON.stringify(_company));
 		_company.save(function(err2){
 			res.json(_company);
