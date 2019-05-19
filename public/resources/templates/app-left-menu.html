@@ -1,0 +1,20 @@
+			<div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li>
+							<a ng-if="dasboardtab == 'active'" href="dashboard" class='active fonty'><i class="fa fa-gear fa-fw"></i> <strong>  Dashboard </strong> </a>						
+                            <a ng-if="dasboardtab != 'active'" href="dashboard" class='fonty'><i class="fa fa-gear fa-fw"></i> Dashboard </a>
+                        </li>
+                        <li>
+                            <a ng-if="inductiontab == 'active'" href="induction" class='active fonty'><i class="fa fa-gear fa-fw"></i> <strong>  Induction From </strong> </a>                     
+                            <a ng-if="inductiontab != 'active'" href="induction" class='fonty'><i class="fa fa-gear fa-fw"></i> Induction From </a>
+                        </li>
+                        <li>
+							<a href="logout" class='fonty' style='color: red;'><i class="fa fa-sign-out fa-fw"></i> <strong> Logout </strong></a>
+                        </li>
+                    </ul>
+					<!-- Branding -->
+					<h5><a class="navbar-brand text-muted small"><strong>&reg; Inferstrat</strong> | Cloud Hub</a></h5>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>

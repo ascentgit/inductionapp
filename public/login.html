@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="Ascent">
+    <meta name="author" content="">
+    <link rel="icon" href="/resources/bootstrap/favicon.ico">
+
+    <title>smartCom</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/resources/bootstrap/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/resources/bootstrap/dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/resources/bootstrap/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<style>
+		body {
+			background-color: #f9f9f9;
+		}
+		.fonty {
+			color: #5e5e5e;
+		}		
+		.icon {
+			width: 40px;
+			height: 40px;
+		}
+	</style>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <div>
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0;  background-color: #5e5e5e;">
+			<div class="navbar-header">
+		
+            </div>
+		</nav>
+	</div>
+    <div class="container"  ng-app="loginApp" ng-controller="loginCtrl">
+       <div class="row">
+            <div class="col-md-4">
+                <div class="login-panel panel panel-info"  style="background-color: #f9f9f9;">
+					<div class="panel-body">
+						<strong style='font-size: 25px; color: #5e5e5e;'> Login</strong></strong>
+					</div>				
+                    <div class="panel-body">
+						<span style="color: red;">{{message}}</span>
+                        <form name="login" action="authenticate" method="post"> 
+                            <fieldset style="border: 1px solid #f9f9f9;">
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="User Id" name="userId" type="text" maxlength="20">
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Password" name="password" type="password" value="" maxlength="10">
+                                </div>
+								<a href="#" onclick="document.forms[0].submit()" class="btn btn-lg btn-success btn-block">Login</a>
+                            </fieldset>
+                        </form>
+                    </div>
+					<!--<h5><a class="navbar-brand text-muted small"><strong>&copy; Copyright 2017</strong></a></h5>-->
+                </div>						
+            </div>
+			<div class="col-md-5">
+				<div class="login-panel" style="margin-left: 10%;">
+				<!-- -->
+					<font style='font-size: 80px; color: #5e5e5e; font-style: italic;'>Ascent</font>
+				
+				</div>
+            </div>
+
+        </div>
+	</div>
+	<!-- Angular -->
+	<script src="/resources/angular/angular.min.js"></script>
+    <!-- jQuery -->
+    <script src="/resources/bootstrap/vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/resources/bootstrap/vendor/bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>
+<script>
+	var login = angular.module('loginApp', []);
+	login.controller('loginCtrl', function($scope, $http) {
+		$scope.message = '<%= message %>';	
+	});
+</script>
