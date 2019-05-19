@@ -60,6 +60,38 @@
 				<div class="col-lg-12">
 					<h1 class="page-header fonty">Manage Company</h1>
 				</div>
+				<div class="col-lg-12" ng-if="showCreateContact">
+					<form role="form">
+						<div class="form-group">
+							<label>Name</label>
+							<input class="form-control" ngModel="contact.name" maxlength="200">
+						</div>
+						<div class="form-group">
+							<label>Designation</label>
+							<input class="form-control" ngModel="contact.designation" maxlength="200">
+						</div>
+						<div class="form-group">
+							<label>Department</label>
+							<input class="form-control" ngModel="contact.department" maxlength="200">
+						</div>
+						<div class="form-group">
+							<label>Email Id</label>
+							<input class="form-control" ngModel="contact.email" maxlength="200">
+						</div>
+						<div class="form-group">
+							<label>Phone No.</label>
+							<input class="form-control" ngModel="contact.phone" maxlength="15">
+						</div>
+						<div class="form-group">
+							<label>Alt. Phone No.</label>
+							<input class="form-control" ngModel="contact.altPhone" maxlength="15">
+						</div>
+						<div class="form-group">
+							<label>Avaialbility</label>
+							<input class="form-control" ngModel="contact.availability" maxlength="200">
+						</div>
+					</form>
+				</div>
 				<div class="col-lg-12" ng-if="showCreateCompany">
 					<div class="col-sm-4 fonty">
 						<form role="form" action="createcompany" method="post">
@@ -92,6 +124,50 @@
 							Cancel
 						</button>						
 					</div>
+				</div>
+				<div class="col-lg-12" ng-if="showContacts">
+					<button class="btn btn-xs btn-success text-right" type="button" ng-click="goToAddContact()">
+						Create New Contact
+				  	</button>
+				  	<table class="table fonty">
+						<thead>
+						  <tr>
+							<th>Name</th>
+							<th>Designation</th>
+							<th>Department</th>
+							<th>Email</th>
+							<th>Phone</th>
+							<th>Alt Phone</th>
+							<th>Availability</th>
+							<th class="text-right">Operation</th>
+						  </tr>
+						</thead>
+						<tbody>
+							 <tr ng-repeat="contact in contactlist | orderBy : 'name'" ng-class-odd="'odd'" ng-class-even="'even'">
+								<td>
+									<span class="">{{contact.name}}</span>
+								</td>
+								<td>
+									<span class="">{{contact.designation}}</span>
+								</td>
+								<td>
+									<span class="">{{contact.department}}</span>
+								</td>
+								<td>
+									<span class="">{{contact.email}}</span>
+								</td>
+								<td>
+									<span class="">{{contact.phone}}</span>
+								</td>
+								<td>
+									<span class="">{{contact.altPhone}}</span>
+								</td>
+								<td>
+									<span class="">{{contact.availability}}</span>
+								</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 				<div class="col-lg-12" ng-if="showCompanyList && !showCreateCompany">
 					<button class="btn btn-xs btn-success text-right" type="button" ng-click="goToAddCompany()">
@@ -175,8 +251,12 @@
 
 	var companyController = function($scope, $http){
 		$scope.loadCompanies = function(){
+			$scope.selectedCompany = null;
+			$scope.showCreateContact = false;
+			$scope.showContacts = false;
 			$scope.showCreateCompany = false;
 			$scope.showCompanyList = false;
+			$scope.contactlist = [];
 			$scope.companylist = [];
 			$http.get("/getcompanies")
 			.then(function(response) {
@@ -187,13 +267,59 @@
 		$scope.loadCompanies();
 
 		$scope.goToAddCompany = function(){
+			$scope.selectedCompany = null;
+			$scope.showCreateContact = false;
+			$scope.showContacts = false;
 			$scope.showCompanyList = false;
+			$scope.contactlist = [];
 			$scope.companylist = [];
 			$scope.showCreateCompany = true;
 		}
+
+		$scope.goToContacts = function(company){
+			$scope.selectedCompany = company;
+			$scope.showCreateContact = false;
+			$scope.showContacts = true;
+			$scope.showCreateCompany = false;
+			$scope.showCompanyList = false;
+			$scope.companylist = [];
+			$scope.contactlist = company.contact;
+		}
+
+		$scope.goToAddContact = function(){
+			$scope.contact = {
+				name: '',
+				designation: '',
+				department: '',
+				email: '',
+				phone: '',
+				altPhone: '',
+				availability: ''
+			};
+			$scope.showCreateContact = true;
+			$scope.showContacts = false;
+			$scope.showCompanyList = false;
+			$scope.showCreateCompany = false;
+		}
+		$scope.createContact = function(){
+			$http.post("/createcontact", $scope.contact)
+			.then(function(response) {
+				$scope.contact = {
+					name: '',
+					designation: '',
+					department: '',
+					email: '',
+					phone: '',
+					altPhone: '',
+					availability: ''
+				};
+				$scope.selectedCompany.contact = response.data;
+				$scope.goToContacts($scope.selectedCompany);
+			});
+		}
+
 	}
 	company.controller('companyCtrl', function($scope, $http) {
-
 		$http.get("/user")
 		.then(function(response) {
 			$scope.userData = response.data.userData;
