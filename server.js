@@ -5,9 +5,9 @@
 const express  		= require("express");
 var mongoose    	= require('mongoose');
 var url 			= require("url");
-var app 			= Express();
+var app 			= express();
 var http 			= require('http').Server(app);
-var router 			= Express.Router();
+var router 			= express.Router();
 var ejs 	 		= require('ejs');
 
 var emailHelper 	= require('sendgrid').mail;
