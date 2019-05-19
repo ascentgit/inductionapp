@@ -201,7 +201,7 @@ app.get("/logout", function(req,res){
 	res.redirect('/login');
 });
 
-http.listen(port, () => {				
+http.listen(process.env.PORT || 3010, () => {				
 	logger.log('##################################################');
 	logger.log('        Ascent Induction App ');
 	logger.log('        Process Port :' + process.env.PORT);
