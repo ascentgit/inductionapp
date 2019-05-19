@@ -200,11 +200,12 @@ router.get("/getcompanies", function(req,res){
 router.post("/createcompany", function(req,res){
 	if(req.session.userData == undefined) return {};
 	let name = req.body.name || req.query.name;
+	let address = req.body.address || req.query.address;
 	var _company = new company({
 		company_code: 'COM_' + Math.floor(Math.random()),
 		name: name,
-		address: 
-		status: 'Initiated'
+		address: address,
+		status: 'Initiated',
 		create_date: new Date(),
 		create_by: req.session.userData.username,
 		active: true
