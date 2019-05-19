@@ -235,8 +235,8 @@ app.post("/createcontact", function(req,res){
 			department: req.body.department || req.query.department,
 			email: req.body.email || req.query.email,
 			phone: req.body.phone || req.query.phone,
-			altPhone: req.body.altPhone || req.query.altPhone;
-			availability: req.body.availability || req.query.availability;
+			altPhone: req.body.altPhone || req.query.altPhone,
+			availability: req.body.availability || req.query.availability
 		};
 		_company.contact.push(_contact);
 		_company.save(function(err){
