@@ -88,11 +88,10 @@
 	}
 	
 	home.controller('homeCtrl', function($scope, $http) {
-		$http.get("/getuser")
+		$http.get("/user")
 		.then(function(response) {
 			$scope.selectedTab = '';
 			$scope.name = response.data.userData.name;
-			$scope.userMenu = response.data.userMenu;
 			//dashboardController($scope, $http);
 		});	
 	});
