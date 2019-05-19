@@ -108,9 +108,21 @@ var urlFormatter = function(_userData){
 	return path + 'app-induction.html'
 }
 
-/*
-	Get Method not Allowed for authentication
-*/
+//All URL Patterns Routing
+router.get("/", function(req,res){
+	if(null != req.session.userData){
+		res.redirect('/' + req.session.userData.homeUrl);
+	} else {
+		res.render('login.html', {message: ''});
+	}
+});
+
+router.get("/login", function(req,res){
+	if(null != req.session || undefined != req.session)
+		req.session.destroy();
+	res.render('login.html', {message: ''});
+});	
+
 router.get("/authenticate", function(req, res){
 	res.redirect('/login');
 });
@@ -131,28 +143,13 @@ router.post("/authenticate", function(req, res){
 					userData.password = '';
 					req.session.userData = userData;
 					console.log(req.session.userData.homeUrl);
-					res.redirect(urlFormatter(userData));
+					res.redirect('/' + userData.homeUrl);
 				}
 			}
 		});	
 	} else {
 		res.render('login.html', {message: 'User Id/Password cannot be blank'});
 	}
-});	
-
-//All URL Patterns Routing
-router.get("/", function(req,res){
-	if(null != req.session.userData){
-		res.redirect('/' + req.session.userData.homeUrl);
-	} else {
-		res.render('login.html', {message: ''});
-	}
-});
-
-router.get("/login", function(req,res){
-	if(null != req.session || undefined != req.session)
-		req.session.destroy();
-	res.render('login.html', {message: ''});
 });	
 
 router.get("/dashboard", function(req,res){
