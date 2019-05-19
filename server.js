@@ -108,8 +108,7 @@ var urlFormatter = function(_userData){
 	return path + 'app-induction.html'
 }
 
-//All URL Patterns Routing
-router.get("/", function(req,res){
+app.get("/", function(req,res){
 	if(null != req.session.userData){
 		res.redirect('/' + req.session.userData.homeUrl);
 	} else {
@@ -117,17 +116,26 @@ router.get("/", function(req,res){
 	}
 });
 
-router.get("/login", function(req,res){
+//All URL Patterns Routing
+app.get("/", function(req,res){
+	if(null != req.session.userData){
+		res.redirect('/' + req.session.userData.homeUrl);
+	} else {
+		res.render('login.html', {message: ''});
+	}
+});
+
+app.get("/login", function(req,res){
 	if(null != req.session || undefined != req.session)
 		req.session.destroy();
 	res.render('login.html', {message: ''});
 });	
 
-router.get("/authenticate", function(req, res){
+app.get("/authenticate", function(req, res){
 	res.redirect('/login');
 });
 
-router.post("/authenticate", function(req, res){
+app.post("/authenticate", function(req, res){
 	let username = req.body.username || req.query.username;
 	let password = req.body.password || req.query.password;
 	if(undefined != username && undefined != password && '' != username && '' != password){
@@ -152,26 +160,26 @@ router.post("/authenticate", function(req, res){
 	}
 });	
 
-router.get("/dashboard", function(req,res){
+app.get("/dashboard", function(req,res){
 	if(req.session.userData == undefined)
 		res.redirect('/login');
 	else res.sendFile(urlFormatter(req.session.userData));
 });
 
-router.get("/induction", function(req,res){
+app.get("/induction", function(req,res){
 	if(req.session.userData == undefined)
 		res.redirect('/login');
 	else res.sendFile(path + 'app-induction.html');
 });
 
-router.get("/logout", function(req,res){
+app.get("/logout", function(req,res){
 	res.redirect('/login');
 });
 
 /*
 	APIs
 */
-router.get('/user', function(req, res) {
+app.get('/user', function(req, res) {
   var username = req.body.username || req.query.username;
   user.findOne({'username': username}, function(err, userData) {
 	userData.password = null;
