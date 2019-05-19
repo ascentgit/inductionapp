@@ -1,7 +1,7 @@
 // get an instance of mongoose and mongoose.Schema
 var config			= require('./config'); // get our config file
 var mongoose 		= require('mongoose');
-var connection 		= mongoose.createConnection(config.authentication); 
+var connection 		= mongoose.createConnection(config.company); 
 var Schema 			= mongoose.Schema;
 
 var remarksSchema = mongoose.Schema({

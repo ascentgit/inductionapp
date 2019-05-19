@@ -102,6 +102,12 @@ var emailHandler = function(emailContainer, callBack){
 	});
 }
 
+var generateId = function(_prefix){
+	var min = 100; 
+    var max = 10000000; 
+	return _prefix + (Math.floor(Math.random() * (+max - +min)) + (+min) ); 
+}
+
 var urlFormatter = function(_userData){
 	switch(_userData.role){
 		case 'GUEST': return path + 'app-induction.html';
@@ -205,7 +211,7 @@ app.post("/createcompany", function(req,res){
 	let name = req.body.name || req.query.name;
 	let address = req.body.address || req.query.address;
 	var _company = new company({
-		company_code: 'COM_' + Math.random(),
+		company_code: generateId('COM'),
 		name: name,
 		address: address,
 		status: 'Initiated',
