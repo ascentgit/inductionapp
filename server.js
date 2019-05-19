@@ -2,7 +2,7 @@
 	Apes's Console
 */
 
-const Express  		= require("express");
+const express  		= require("express");
 var mongoose    	= require('mongoose');
 var url 			= require("url");
 var app 			= Express();
