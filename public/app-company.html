@@ -94,6 +94,9 @@
 					</div>
 				</div>
 				<div class="col-lg-12" ng-if="showCompanyList && !showCreateCompany">
+					<button class="btn btn-xs btn-success text-right" type="button" ng-click="goToAddCompany()">
+						Create New Company
+				  	</button>
 					<table class="table fonty">
 						<thead>
 						  <tr>
@@ -101,7 +104,7 @@
 							<th>Name</th>
 							<th>Status</th>
 							<th>Active</th>
-							<th>Operation</th>
+							<th class="text-right">Operation</th>
 						  </tr>
 						</thead>
 						<tbody>
@@ -136,9 +139,6 @@
 						  </tr>		  
 						</tbody>
 				  	</table>	
-				  	<button class="btn btn-xs btn-success" type="button" ng-click="goToAddCompany()">
-						Create New Company
-				  	</button>	
 				</div>
 			</div>
 		</div>
