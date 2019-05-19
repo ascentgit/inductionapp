@@ -39,7 +39,7 @@
   </head>
 
   <body>
-    <div id="wrapper" ng-app="homeApp" ng-controller="homeCtrl">
+    <div id="wrapper" ng-app="indApp" ng-controller="indCtrl">
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0;  background-color: #5e5e5e;">
 			<div class="navbar-header">
@@ -52,9 +52,10 @@
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header fonty">Dashboard</h1>
+					<h1 class="page-header fonty">Induction Form</h1>
 				</div>
 				<div class="col-lg-12">
+					
 				</div>
 			</div>
 		</div>
@@ -69,30 +70,22 @@
   </body>
 </html>
 <script>
-	var home = angular.module('homeApp', []);
-	home.directive('leftmenu', function($compile) {
+	var ind = angular.module('indApp', []);
+	ind.directive('leftmenu', function($compile) {
 		var directive = {};
 		directive.restrict = 'E';
 		directive.templateUrl = "/resources/templates/app-left-menu.html";		
 		directive.controller = function($scope, $rootScope, $http) {
-			$scope.dasboardtab = 'active';		
+			$scope.inductiontab = 'active';		
 		};		
 		return directive;
-	});	
+	});
 	
-	var dashboardController = function($scope, $http){
-		$http.get("/loadconstructionsitematrix")
-		.then(function(response) {
-			//$scope.sites = response.data.data;
-		});	
-	}
-	
-	home.controller('homeCtrl', function($scope, $http) {
+	home.controller('indCtrl', function($scope, $http) {
 		$http.get("/user")
 		.then(function(response) {
 			$scope.userData = response.data.userData;
 			$scope.name = response.data.userData.first_name + ' ' + response.data.userData.last_name;
-			//dashboardController($scope, $http);
 		});	
 	});
 </script>

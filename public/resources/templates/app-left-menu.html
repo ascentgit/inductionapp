@@ -1,11 +1,11 @@
 			<div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                        <li>
+                        <li ng-if="userData.role == 'ADMIN'">
 							<a ng-if="dasboardtab == 'active'" href="dashboard" class='active fonty'><i class="fa fa-gear fa-fw"></i> <strong>  Dashboard </strong> </a>						
                             <a ng-if="dasboardtab != 'active'" href="dashboard" class='fonty'><i class="fa fa-gear fa-fw"></i> Dashboard </a>
                         </li>
-                        <li>
+                        <li ng-if="userData.role == 'GUEST'">
                             <a ng-if="inductiontab == 'active'" href="induction" class='active fonty'><i class="fa fa-gear fa-fw"></i> <strong>  Induction From </strong> </a>                     
                             <a ng-if="inductiontab != 'active'" href="induction" class='fonty'><i class="fa fa-gear fa-fw"></i> Induction From </a>
                         </li>
