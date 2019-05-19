@@ -205,6 +205,6 @@ http.listen(process.env.PORT || 3010, () => {
 	logger.log('##################################################');
 	logger.log('        Ascent Induction App ');
 	logger.log('        Process Port :' + process.env.PORT);
-	logger.log('        Local Port   :' + port);
+	logger.log('        Local Port   :' + 3010);
 	logger.log('##################################################');
 });	
