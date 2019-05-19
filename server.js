@@ -181,7 +181,7 @@ app.get("/logout", function(req,res){
 */
 app.get('/user', function(req, res) {
   if(req.session.userData == undefined) return {};
-  res.json({success: true, data: req.session.userData});
+  res.json({success: true, userData: req.session.userData});
 });
 
 

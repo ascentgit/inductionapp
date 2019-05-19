@@ -83,7 +83,7 @@
 	var dashboardController = function($scope, $http){
 		$http.get("/loadconstructionsitematrix")
 		.then(function(response) {
-			
+			//$scope.sites = response.data.data;
 		});	
 	}
 	
@@ -91,7 +91,7 @@
 		$http.get("/user")
 		.then(function(response) {
 			$scope.selectedTab = '';
-			$scope.name = response.data.first_name + ' ' + response.data.last_name;
+			$scope.name = response.data.userData.first_name + ' ' + response.data.userData.last_name;
 			//dashboardController($scope, $http);
 		});	
 	});
