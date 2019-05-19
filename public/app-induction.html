@@ -42,7 +42,7 @@
     <div id="wrapper" ng-app="indApp" ng-controller="indCtrl">
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0;  background-color: #5e5e5e;">
-			<header-tag></header-tag>
+			<headertag></headertag>
 			<leftmenu></leftmenu>
 		</nav>
 		<div id="page-wrapper">
@@ -67,7 +67,7 @@
 </html>
 <script>
 	var ind = angular.module('indApp', []);
-	ind.directive('header-tag', function($compile) {
+	ind.directive('headertag', function($compile) {
 		var directive = {};
 		directive.restrict = 'E';
 		directive.templateUrl = "/resources/templates/header.html";		
