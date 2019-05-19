@@ -230,11 +230,11 @@ app.post("/createcontact", function(req,res){
 	let _id = req.body.id || req.query.id;
 	company.find({_id: _id} , function(err, _company){
 		var _contact = {
-			name: '',
-			designation: req.body.designation || req.query.designation;,
-			department: req.body.department || req.query.department;,
-			email: req.body.email || req.query.email;,
-			phone: req.body.phone || req.query.phone;,
+			name: req.body.name || req.query.name,
+			designation: req.body.designation || req.query.designation,
+			department: req.body.department || req.query.department,
+			email: req.body.email || req.query.email,
+			phone: req.body.phone || req.query.phone,
 			altPhone: req.body.altPhone || req.query.altPhone;
 			availability: req.body.availability || req.query.availability;
 		};
