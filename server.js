@@ -180,11 +180,8 @@ app.get("/logout", function(req,res){
 	APIs
 */
 app.get('/user', function(req, res) {
-  var username = req.body.username || req.query.username;
-  user.findOne({'username': username}, function(err, userData) {
-	userData.password = null;
-	res.json({success: true, data: userData});
-  });
+  if(req.session.userData == undefined) return {};
+  res.json({success: true, data: req.session.userData});
 });
 
 
