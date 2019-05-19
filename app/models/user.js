@@ -5,7 +5,7 @@ var connection 		= mongoose.createConnection(config.authentication);
 var Schema 			= mongoose.Schema;
 
 // set up a mongoose model and pass it using module.exports
-module.exports = connection.model('USER', new Schema({ 
+module.exports = connection.model('user', new Schema({ 
 	username: String,
 	password: String, 
     first_name: String,
@@ -14,4 +14,4 @@ module.exports = connection.model('USER', new Schema({
 	role: String,
 	homeUrl: String,
 	active: Boolean
-}),'USER');
+}),'user');

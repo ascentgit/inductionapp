@@ -30,7 +30,7 @@ app.use(cookieParser());
 
 var config = require('./app/models/config'); // get our config file
 
-mongoose.connect(config.mongosession, { useNewUrlParser: true });
+mongoose.connect(config.mongosession);
 var sessionStore = new MongoStore({mongooseConnection: mongoose.connection });
 	
 app.use(session({
