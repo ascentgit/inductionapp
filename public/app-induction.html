@@ -42,11 +42,7 @@
     <div id="wrapper" ng-app="indApp" ng-controller="indCtrl">
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0;  background-color: #5e5e5e;">
-			<div class="navbar-header">
-                <a class="navbar-brand" style='color: white; font-size: 12px;' href="power">
-					<strong style='font-size: 17px; font-style:italic;'>Ascent</strong> <strong> Welcome</strong> : {{name}}
-				</a>
-            </div>
+			<header-tag></header-tag>
 			<leftmenu></leftmenu>
 		</nav>
 		<div id="page-wrapper">
@@ -71,6 +67,15 @@
 </html>
 <script>
 	var ind = angular.module('indApp', []);
+	ind.directive('header-tag', function($compile) {
+		var directive = {};
+		directive.restrict = 'E';
+		directive.templateUrl = "/resources/templates/header.html";		
+		directive.controller = function($scope, $rootScope, $http) {
+				
+		};		
+		return directive;
+	});
 	ind.directive('leftmenu', function($compile) {
 		var directive = {};
 		directive.restrict = 'E';
