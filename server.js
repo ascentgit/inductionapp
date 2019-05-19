@@ -144,20 +144,6 @@ var emailHandler = function(emailContainer, callBack){
 	});
 }
 
-router.get('/', function(req, res) {
-  res.json({ message: 'Welcome to SmartCom! Please Authenticate to Get Access Token.' });
-});
-
-router.get('/user', function(req, res) {
-  var userId = req.body.userId || req.query.userId;
-  user.findOne({'userId': userId}, function(err, userData) {
-	userData.password = null;
-	menu.find({'userId': userId, app: true }, function(err, menuList) {
-		res.json({success: true, data: userData, menu: menuList});
-	});
-  });
-});
-
 //All URL Patterns Routing
 app.get("/", function(req,res){
 	if(null != req.session.userData){
@@ -200,6 +186,20 @@ router.get("/logout", function(req,res){
 app.get("/logout", function(req,res){
 	res.redirect('/login');
 });
+
+/*
+	APIs
+*/
+router.get('/user', function(req, res) {
+  var userId = req.body.userId || req.query.userId;
+  user.findOne({'userId': userId}, function(err, userData) {
+	userData.password = null;
+	menu.find({'userId': userId, app: true }, function(err, menuList) {
+		res.json({success: true, data: userData, menu: menuList});
+	});
+  });
+});
+
 
 http.listen(process.env.PORT || 3010, () => {				
 	logger.log('##################################################');
