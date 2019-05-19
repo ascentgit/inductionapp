@@ -309,6 +309,7 @@
 			$scope.showCreateCompany = false;
 		}
 		$scope.createContact = function(){
+			vonsole.log('COntact - >' + JSON.stringify($scope.contact));
 			$http.post("/createcontact", $scope.contact)
 			.then(function(response) {
 				$scope.contact = {
