@@ -182,6 +182,12 @@
 			});
 		}
 		$scope.loadCompanies();
+
+		$scope.goToAddCompany = function(){
+			$scope.showCompanyList = false;
+			$scope.companylist = [];
+			$scope.showCreateCompany = true;
+		}
 	}
 	company.controller('companyCtrl', function($scope, $http) {
 
