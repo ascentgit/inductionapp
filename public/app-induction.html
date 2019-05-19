@@ -55,7 +55,7 @@
 					<h1 class="page-header fonty">Induction Form</h1>
 				</div>
 				<div class="col-lg-12">
-					
+
 				</div>
 			</div>
 		</div>
@@ -81,7 +81,7 @@
 		return directive;
 	});
 	
-	home.controller('indCtrl', function($scope, $http) {
+	ind.controller('indCtrl', function($scope, $http) {
 		$http.get("/user")
 		.then(function(response) {
 			$scope.userData = response.data.userData;
