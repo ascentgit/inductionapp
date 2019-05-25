@@ -64,33 +64,33 @@
 					<div class="col-lg-4">
 						<div class="form-group">
 							<label>Name</label>
-							<input class="form-control" ngModel="contact.name" maxlength="200">
+							<input class="form-control" ng-model="contact.name" maxlength="200">
 						</div>
 						<div class="form-group">
 							<label>Designation</label>
-							<input class="form-control" ngModel="contact.designation" maxlength="200">
+							<input class="form-control" ng-model="contact.designation" maxlength="200">
 						</div>
 						<div class="form-group">
 							<label>Department</label>
-							<input class="form-control" ngModel="contact.department" maxlength="200">
+							<input class="form-control" ng-model="contact.department" maxlength="200">
 						</div>
 						<div class="form-group">
 							<label>Email Id</label>
-							<input class="form-control" ngModel="contact.email" maxlength="200">
+							<input class="form-control" ng-model="contact.email" maxlength="200">
 						</div>
 					</div>
 					<div class="col-lg-4">
 						<div class="form-group">
 							<label>Phone No.</label>
-							<input class="form-control" ngModel="contact.phone" maxlength="15">
+							<input class="form-control" ng-model="contact.phone" maxlength="15">
 						</div>
 						<div class="form-group">
 							<label>Alt. Phone No.</label>
-							<input class="form-control" ngModel="contact.altPhone" maxlength="15">
+							<input class="form-control" ng-model="contact.altPhone" maxlength="15">
 						</div>
 						<div class="form-group">
 							<label>Avaialbility</label>
-							<input class="form-control" ngModel="contact.availability" maxlength="200">
+							<input class="form-control" ng-model="contact.availability" maxlength="200">
 						</div>
 					</form>
 					<button ng-click="createContact()" class="btn btn-xs btn-success">
@@ -173,7 +173,7 @@
 								<td>
 									<span class="">{{contact.availability}}</span>
 								</td>
-								<td>
+								<td class="text-right">
 									<button class="btn btn-xs btn-primary" type="button" ng-click="goToEditContact(contact)">
 										Edit
 									</button>
@@ -338,7 +338,7 @@
 		$scope.deleteContact = function(contact){
 			$scope.contact = contact;
 			$scope.contact.companyId = $scope.selectedCompany._id;
-			
+
 			$scope.goToContacts($scope.selectedCompany);
 		}
 
