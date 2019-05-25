@@ -232,7 +232,7 @@ app.post("/savecontact", function(req,res){
 	console.log(_contact);
 	company.findOne({_id: _id} , function(err, _company){
 		if(err) res.json({});
-		if(_contact.id == null){
+		if(_contact.id == null || _contact.id == ''){
 			console.log('Total Contacts before = ' + JSON.stringify(_company));
 			_contact.id = _company.contact.length;
 			_company.contact.push(_contact);
