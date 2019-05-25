@@ -240,7 +240,14 @@ app.post("/savecontact", function(req,res){
 			console.log('Update Contact id = ' + _contact.id);
 			for(var i =0; i<_company.contact.length; i++){
 				if(_company.contact[i].id == _contact.id){
-					_company.contact[i] = _contact;
+					_company.contact[i].name = _contact.name;
+					_company.contact[i].designation = _contact.designation;
+					_company.contact[i].department = _contact.department;
+					_company.contact[i].email = _contact.email;
+					_company.contact[i].phone = _contact.phone;
+					_company.contact[i].altPhone = _contact.altPhone;
+					_company.contact[i].availability = _contact.availability;
+					break;
 				}
 			}
 		}
