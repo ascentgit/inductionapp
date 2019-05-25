@@ -225,7 +225,7 @@ app.post("/createcompany", function(req,res){
 });
 
 
-app.post("/createcontact", function(req,res){
+app.post("/savecontact", function(req,res){
 	if(req.session.userData == undefined) return {};
 	let _id = req.body.companyId || req.query.companyId;
 	var _contact = req.body;

@@ -93,7 +93,7 @@
 							<input class="form-control" ng-model="contact.availability" maxlength="200">
 						</div>
 					</form>
-					<button ng-click="createContact()" class="btn btn-xs btn-success">
+					<button ng-click="saveContact()" class="btn btn-xs btn-success">
 						Save Contact
 					</button>
 					<button class="btn btn-xs btn-default" type="button" ng-click="loadCompanies()">
@@ -317,9 +317,10 @@
 			$scope.showCompanyList = false;
 			$scope.showCreateCompany = false;
 		}
-		$scope.createContact = function(){
+		$scope.saveContact = function(){
 			console.log('Contact - >' + JSON.stringify($scope.contact));
-			$http.post("/createcontact", $scope.contact)
+			$scope.contact.companyId = $scope.selectedCompany._id;
+			$http.post("/savecontact", $scope.contact)
 			.then(function(response) {
 				$scope.contact = {
 					companyId: '',
