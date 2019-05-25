@@ -227,16 +227,9 @@ app.post("/createcompany", function(req,res){
 
 app.post("/createcontact", function(req,res){
 	if(req.session.userData == undefined) return {};
-	let _id = req.body.id || req.query.id;
-	var _contact = {
-		name: req.body.name || req.query.name,
-		designation: req.body.designation || req.query.designation,
-		department: req.body.department || req.query.department,
-		email: req.body.email || req.query.email,
-		phone: req.body.phone || req.query.phone,
-		altPhone: req.body.altPhone || req.query.altPhone,
-		availability: req.body.availability || req.query.availability
-	};
+	let _id = req.body.companyId || req.query.companyId;
+	var _contact = req.body;
+	console.log(_contact);
 	company.findOne({_id: _id} , function(err, _company){
 		if(err) res.json({}); 
 		console.log('Total Contacts before = ' + JSON.stringify(_company));

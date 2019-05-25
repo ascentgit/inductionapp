@@ -92,13 +92,13 @@
 							<label>Avaialbility</label>
 							<input class="form-control" ngModel="contact.availability" maxlength="200">
 						</div>
-						<button ng-click="createContact()" class="btn btn-xs btn-success">
-								Create Contact
-						</button>
-						<button class="btn btn-xs btn-default" type="button" ng-click="loadCompanies()">
-							Cancel
-						</button><br/></br>
 					</form>
+					<button ng-click="createContact()" class="btn btn-xs btn-success">
+						Save Contact
+					</button>
+					<button class="btn btn-xs btn-default" type="button" ng-click="loadCompanies()">
+						Cancel
+					</button><br/></br>
 				</div>
 				<div class="col-lg-12" ng-if="showCreateCompany">
 					<div class="col-sm-4 fonty">
@@ -126,7 +126,7 @@
 							</div>
 						</form>
 						<a href="#" onclick="document.forms[0].submit()" class="btn btn-xs btn-success">
-							Create Company
+							Save Company
 						</a>
 						<button class="btn btn-xs btn-default" type="button" ng-click="loadCompanies()">
 							Cancel
@@ -172,6 +172,14 @@
 								</td>
 								<td>
 									<span class="">{{contact.availability}}</span>
+								</td>
+								<td>
+									<button class="btn btn-xs btn-primary" type="button" ng-click="goToEditContact(contact)">
+										Edit
+									</button>
+									<button class="btn btn-xs btn-default" type="button" ng-click="loadCompanies()">
+										Cancel
+									</button>
 								</td>
 							</tr>
 						</tbody>
@@ -295,7 +303,7 @@
 
 		$scope.goToAddContact = function(){
 			$scope.contact = {
-				id: $scope.selectedCompany._id,
+				companyId: $scope.selectedCompany._id,
 				name: '',
 				designation: '',
 				department: '',
@@ -310,11 +318,11 @@
 			$scope.showCreateCompany = false;
 		}
 		$scope.createContact = function(){
-			vonsole.log('COntact - >' + JSON.stringify($scope.contact));
+			console.log('Contact - >' + JSON.stringify($scope.contact));
 			$http.post("/createcontact", $scope.contact)
 			.then(function(response) {
 				$scope.contact = {
-					id: '',
+					companyId: '',
 					name: '',
 					designation: '',
 					department: '',
@@ -326,6 +334,21 @@
 				$scope.selectedCompany.contact = response.data;
 				$scope.goToContacts($scope.selectedCompany);
 			});
+		}
+		$scope.deleteContact = function(contact){
+			$scope.contact = contact;
+			$scope.contact.companyId = $scope.selectedCompany._id;
+			
+			$scope.goToContacts($scope.selectedCompany);
+		}
+
+		$scope.goToEditContact = function(contact){
+			$scope.contact = contact;
+			$scope.contact.id = $scope.selectedCompany._id;
+			$scope.showCreateContact = true;
+			$scope.showContacts = false;
+			$scope.showCompanyList = false;
+			$scope.showCreateCompany = false;
 		}
 
 	}
