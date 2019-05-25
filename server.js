@@ -231,10 +231,19 @@ app.post("/savecontact", function(req,res){
 	var _contact = req.body;
 	console.log(_contact);
 	company.findOne({_id: _id} , function(err, _company){
-		if(err) res.json({}); 
-		console.log('Total Contacts before = ' + JSON.stringify(_company));
-		_company.contact.push(_contact);
-		console.log('Total Contacts after = ' + JSON.stringify(_company));
+		if(err) res.json({});
+		if(_contact.id == null){
+			console.log('Total Contacts before = ' + JSON.stringify(_company));
+			_company.contact.push(_contact);
+			console.log('Total Contacts after = ' + JSON.stringify(_company));
+		} else {
+			console.log('Update Contact id = ' + _contact.id);
+			for(var i =0; i<_company.contact.length; i++){
+				if(_company.contact[i].id == _contact.id){
+					_company.contact[i] = _contact;
+				}
+			}
+		}
 		_company.save(function(err2){
 			res.json(_company);
 		});
