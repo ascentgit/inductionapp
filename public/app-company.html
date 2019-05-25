@@ -304,6 +304,7 @@
 		$scope.goToAddContact = function(){
 			$scope.contact = {
 				companyId: $scope.selectedCompany._id,
+				id: '',
 				name: '',
 				designation: '',
 				department: '',
@@ -324,6 +325,7 @@
 			.then(function(response) {
 				$scope.contact = {
 					companyId: '',
+					id: '',
 					name: '',
 					designation: '',
 					department: '',
